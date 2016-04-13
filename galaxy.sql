@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2016-04-13 16:08:59
+Date: 2016-04-13 16:35:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -4400,6 +4400,27 @@ CREATE TABLE `prop_value` (
 -- ----------------------------
 INSERT INTO `prop_value` VALUES ('60', '26', 'red', 'red', '1', '0');
 INSERT INTO `prop_value` VALUES ('61', '26', 'black', 'black', '1', '1');
+
+-- ----------------------------
+-- Table structure for `refund`
+-- ----------------------------
+DROP TABLE IF EXISTS `refund`;
+CREATE TABLE `refund` (
+  `refund_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL,
+  `refund_fee` float(2,0) NOT NULL,
+  `reason` varchar(255) DEFAULT '未知',
+  `memo` varchar(255) DEFAULT 'memo',
+  `image` varchar(255) NOT NULL,
+  `create_at` int(11) DEFAULT NULL,
+  `update_at` int(11) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`refund_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of refund
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `setting`
