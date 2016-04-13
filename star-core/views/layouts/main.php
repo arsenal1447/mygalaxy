@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
+// use yii\grid\GridView;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -33,28 +34,31 @@ AppAsset::register($this);
             ]);
 
             $menuItems = [
-                ['label' => 'Home', 'url' => ['/site/index']],
+                ['label' =>Yii::t('app','Home'), 'url' => ['/site/index']],
             ];
             if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Login', 'url' => ['/site/security/login']];
+                $menuItems[] = ['label' =>Yii::t('app','Login'), 'url' => ['/site/security/login']];
             } else {
                 $menuItems[] = [
-                    'label' => 'User', 'url' => ['/user/admin/index'],
+                    'label' =>Yii::t('app','User'), 'url' => ['/user/admin/index'],
                 ];
                 $menuItems[] = [
-                    'label' => 'Blog', 'url' => ['/blog/core/post/index'],
+                    'label' =>Yii::t('app','Blog'), 'url' => ['/blog/core/post/index'],
                 ];
                 $menuItems[] = [
-                    'label' => 'Catalog', 'url' => ['/catalog/core/default/index'],
+                    'label' =>Yii::t('app','Catalog') , 'url' => ['/catalog/core/default/index'],
                 ];
                 $menuItems[] = [
-                    'label' => 'Tree', 'url' => ['/tree/index'],
+//                     'label' => 'Tree', 'url' => ['/tree/index'],
+                    'label' =>Yii::t('app','Tree') , 'url' => ['/tree/index'],
                 ];
                 $menuItems[] = [
-                    'label' => 'Station', 'url' => ['/station/default/index'],
+//                     'label' => 'Station', 'url' => ['/station/default/index'],
+                    'label' =>Yii::t('app','Station') , 'url' => ['/tree/index'],
                 ];
                 $menuItems[] = [
-                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+//                     'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                    'label' => Yii::t('app','Login Out').'(' . Yii::$app->user->identity->admin_name . ')',
                     'url' => ['/user/security/logout'],
                     'linkOptions' => ['data-method' => 'post']
                 ];
