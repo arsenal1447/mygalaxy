@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2016-04-13 16:35:53
+Date: 2016-04-14 16:22:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -3755,7 +3755,7 @@ CREATE TABLE `auth_assignment` (
 -- Records of auth_assignment
 -- ----------------------------
 INSERT INTO `auth_assignment` VALUES ('Administrator', '1', '1432554123');
-INSERT INTO `auth_assignment` VALUES ('Customer', '157', '1432887959');
+INSERT INTO `auth_assignment` VALUES ('Administrator', '157', '1460615556');
 
 -- ----------------------------
 -- Table structure for `auth_item`
@@ -3915,7 +3915,7 @@ CREATE TABLE `cart` (
 -- ----------------------------
 -- Records of cart
 -- ----------------------------
-INSERT INTO `cart` VALUES ('9', '1', '81', '0', '1', null, '1433482078');
+INSERT INTO `cart` VALUES ('9', '1', '81', '0', '1', null, '1460618560');
 
 -- ----------------------------
 -- Table structure for `comment`
@@ -4101,11 +4101,12 @@ CREATE TABLE `item` (
   `city` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`item_id`),
   KEY `fk_item_category1_idx` (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of item
 -- ----------------------------
+INSERT INTO `item` VALUES ('63', '48', '0', '红米note3', '300', '0', '899.00', '1', '{\"28\":[\"28:63\",\"28:64\"]}', '{\"\\u914d\\u7f6e\":[\"\\u914d\\u7f6e:\\u9ad8\\u914d\\u7248\",\"\\u914d\\u7f6e:\\u4f4e\\u914d\\u7248\"]}', '<p>哎呦 不错哦&nbsp;</p>\r\n', '10.00', '1', '1', '1', '1', '1', '0', '0', '0', '0', '1460613538', '1460616977', '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for `item_img`
@@ -4121,11 +4122,15 @@ CREATE TABLE `item_img` (
   PRIMARY KEY (`img_id`),
   KEY `fk_item_img_item1_idx` (`item_id`),
   CONSTRAINT `fk_item_img_item1` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of item_img
 -- ----------------------------
+INSERT INTO `item_img` VALUES ('33', '63', '2016/04/14/0f6519e08be909a3368789e3e6b0f553.jpg', '20151126111852497.jpg', '0', '1460613538');
+INSERT INTO `item_img` VALUES ('34', '63', '2016/04/14/f057772d5377307d0e74be7842296d6a.jpg', 'ceAXsTdC5uvgU.jpg', '1', '1460616965');
+INSERT INTO `item_img` VALUES ('35', '63', '2016/04/14/ad9a050c2e1dc3ac68e2b45391851e47.jpg', 'ce1JwIZ1M2saQ.jpg', '1', '1460616965');
+INSERT INTO `item_img` VALUES ('36', '63', '2016/04/14/931f70448b3a036dc131e50005d6eb50.jpg', 'ce1JwIZ1M2saQ.jpg', '1', '1460616974');
 
 -- ----------------------------
 -- Table structure for `item_prop`
@@ -4148,12 +4153,14 @@ CREATE TABLE `item_prop` (
   `sort_order` tinyint(3) unsigned DEFAULT '255' COMMENT '排序',
   PRIMARY KEY (`prop_id`),
   KEY `fk_item_prop_category1_idx` (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of item_prop
 -- ----------------------------
 INSERT INTO `item_prop` VALUES ('26', '38', '0', '0', '颜色', 'test', '3', '0', '1', '0', '0', '0', '0', null);
+INSERT INTO `item_prop` VALUES ('27', '38', '0', '0', '颜色', '衣服颜色', '2', '1', '1', '1', '1', '1', '0', '1');
+INSERT INTO `item_prop` VALUES ('28', '48', '0', '0', '配置', '配置参数', '2', '1', '1', '1', '1', '1', '0', '1');
 
 -- ----------------------------
 -- Table structure for `language`
@@ -4298,11 +4305,12 @@ CREATE TABLE `post` (
   `update_time` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_post_author` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of post
 -- ----------------------------
+INSERT INTO `post` VALUES ('1', '38', '1', '0', '0', '0', '2', '我的衣服', 'sss', 'sss', 'ss', '<p>sss</p>\r\n', '', null, '9', '1', '1460621612', '1460621993');
 
 -- ----------------------------
 -- Table structure for `product`
@@ -4393,13 +4401,16 @@ CREATE TABLE `prop_value` (
   PRIMARY KEY (`value_id`),
   KEY `fk_prop_value_item_prop1_idx` (`prop_id`),
   CONSTRAINT `fk_prop_value_item_prop1` FOREIGN KEY (`prop_id`) REFERENCES `item_prop` (`prop_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of prop_value
 -- ----------------------------
 INSERT INTO `prop_value` VALUES ('60', '26', 'red', 'red', '1', '0');
 INSERT INTO `prop_value` VALUES ('61', '26', 'black', 'black', '1', '1');
+INSERT INTO `prop_value` VALUES ('62', '27', '属性1', '属性1', '1', '0');
+INSERT INTO `prop_value` VALUES ('63', '28', '高配版', '高配版', '1', '0');
+INSERT INTO `prop_value` VALUES ('64', '28', '低配版', '低配版', '1', '1');
 
 -- ----------------------------
 -- Table structure for `refund`
@@ -4497,11 +4508,13 @@ CREATE TABLE `sku` (
   PRIMARY KEY (`sku_id`),
   KEY `fk_sku_item1_idx` (`item_id`),
   CONSTRAINT `fk_sku_item1` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sku
 -- ----------------------------
+INSERT INTO `sku` VALUES ('84', '63', null, '{\"28\":\"28:63\"}', '{\"\\u914d\\u7f6e\":\"\\u914d\\u7f6e:\\u9ad8\\u914d\\u7248\"}', '100', '1099.00', 'outerid1', '1');
+INSERT INTO `sku` VALUES ('85', '63', null, '{\"28\":\"28:64\"}', '{\"\\u914d\\u7f6e\":\"\\u914d\\u7f6e:\\u4f4e\\u914d\\u7248\"}', '200', '899.00', 'outerid2', '1');
 
 -- ----------------------------
 -- Table structure for `social_account`
@@ -4657,7 +4670,7 @@ CREATE TABLE `tree` (
   KEY `lft` (`lft`),
   KEY `rgt` (`rgt`),
   KEY `level` (`level`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tree
@@ -4674,6 +4687,7 @@ INSERT INTO `tree` VALUES ('44', '1', '11', '12', '3', 'default', '户外');
 INSERT INTO `tree` VALUES ('45', '1', '13', '14', '3', 'default', '室内');
 INSERT INTO `tree` VALUES ('46', '1', '15', '16', '3', 'default', '母婴');
 INSERT INTO `tree` VALUES ('47', '1', '4', '5', '4', 'default', '短袖');
+INSERT INTO `tree` VALUES ('48', '1', '4', '5', '3', 'default', '手机');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -4701,7 +4715,7 @@ CREATE TABLE `user` (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', 'admin', 'admin@a.com', '$2y$10$LoiYdggKnoIZBsrlefUpJOFANhJe15RBzjKW4zj6/GhQhAyJOjNG.', 'WdTQviiBj8pOOAWpBMa6gnib3xTUdyg7', '1432541159', null, null, '127.0.0.1', '1432541160', '1432541160', '0');
-INSERT INTO `user` VALUES ('157', 'home', '123@qq.com', '$2y$10$o9jnxDBVyPVndNlkDhZp8uIAZI0vB3kFmjiI9rlSXa1TR3kdOH4/K', '4q-42jX5zmo7G86PC0ZRPBg1FAMnB09w', '1432887959', null, null, '127.0.0.1', '1432887959', '1432887959', '0');
+INSERT INTO `user` VALUES ('157', 'home', '123@qq.com', '$2y$10$ZQLqsI2F9TZin0IyKQIJT.RN3BKe/vjg1Ovs74rDzZ0B3qChJiE1y', '4q-42jX5zmo7G86PC0ZRPBg1FAMnB09w', '1432887959', null, null, '127.0.0.1', '1432887959', '1460615513', '0');
 
 -- ----------------------------
 -- Table structure for `user_profile`
@@ -4719,11 +4733,13 @@ CREATE TABLE `user_profile` (
   `birthday` int(11) DEFAULT NULL,
   `rank` int(11) DEFAULT NULL,
   PRIMARY KEY (`user_profile_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_profile
 -- ----------------------------
+INSERT INTO `user_profile` VALUES ('1', '1', '0', '0', null, null, null, null, null, null);
+INSERT INTO `user_profile` VALUES ('2', '157', '0', '0', null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `wishlist`

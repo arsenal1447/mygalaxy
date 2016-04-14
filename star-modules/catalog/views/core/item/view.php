@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use star\catalog\models\Item;
 
 /* @var $this yii\web\View */
 /* @var $model star\catalog\models\Item */
@@ -30,7 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'item_id',
             'category_id',
-            'outer_id',
+            [
+                'label'=>'outer_id',
+                'value'=>Item::getSkuByItemId($model->item_id),
+            ],
             'title',
             'stock',
             'min_number',

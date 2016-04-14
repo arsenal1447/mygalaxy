@@ -13,11 +13,18 @@ use kartik\widgets\Select2;
 use star\blog\models\Tag;
 use yii\helpers\ArrayHelper;
 use star\blog\models\Lookup;
+use yii\helpers\Url;
 
 
  $form = ActiveForm::begin(); ?>
 
-<?= $form->field($model, 'category_id')->dropDownList(Tree::getTreesByName('内容分类')) ?>
+<?php //echo  $form->field($model, 'category_id')->dropDownList(Tree::getTreesByName('内容分类')) ?>
+<?php echo $form->field($model, 'category_id')->dropDownList(Tree::getTreesByName('商品分类'),[
+        'data-url' => Url::to(['/catalog/core/item/item-props']),
+//         'data-item_id' => $model->item_id,
+        'data-tree_id' => $model->category_id ? $model->category_id : key(Tree::getTreesByName('商品分类')),
+    ]);
+?>
 
 <?= $form->field($model, 'title')->textInput(['maxlength' => 200]) ?>
 

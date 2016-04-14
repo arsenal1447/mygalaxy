@@ -46,6 +46,7 @@ use yii\imagine\Image;
 class Item extends \yii\db\ActiveRecord
 {
     public $images;
+    public $outer_id;
     /**
      * @inheritdoc
      */
@@ -64,10 +65,10 @@ class Item extends \yii\db\ActiveRecord
             [['category_id', 'stock', 'star_id','min_number', 'is_show', 'is_promote', 'is_new', 'is_hot', 'is_best', 'click_count', 'wish_count', 'review_count', 'deal_count', 'create_time', 'update_time', 'country', 'state', 'city'], 'integer'],
             [['price', 'shipping_fee'], 'number'],
             [['props', 'props_name', 'desc'], 'string'],
-            [[ 'language'], 'string', 'max' => 45],
+            [['language'], 'string', 'max' => 45],
             [['title'], 'string', 'max' => 255],
             [['currency'], 'string', 'max' => 20],
-            [[  'price','stock', 'min_number', 'is_show', 'is_promote', 'is_new', 'is_hot', 'is_best', 'click_count', 'wish_count', 'review_count', 'deal_count'],'default','value'=>0]
+            [['price','stock', 'min_number', 'is_show', 'is_promote', 'is_new', 'is_hot', 'is_best', 'click_count', 'wish_count', 'review_count', 'deal_count'],'default','value'=>0]
         ];
     }
 
@@ -115,6 +116,7 @@ class Item extends \yii\db\ActiveRecord
             'state' => Yii::t('catalog', 'State'),
             'city' => Yii::t('catalog', 'City'),
             'images' => Yii::t('catalog', '图片'),
+            'outer_id' => Yii::t('catalog', '商家设置的外部id'),//zxx add
         ];
     }
 
@@ -322,5 +324,23 @@ class Item extends \yii\db\ActiveRecord
     public function getMainImage(){
         $itemImages = $this->itemImgs;
         return isset($itemImages[0])?$itemImages[0]->pic:'';
+    }
+    
+    /**
+     * $desc 根据itemid获取sku的outerid
+     * @param unknown $id
+     */
+    public static function getSkuByItemId($id){
+        $sku = new Sku();
+        $skumodel = $sku::find()->select(['outer_id'])->where(['item_id'=>$id])->asArray()->all();
+        $outstr = '';
+        foreach($skumodel as $k=>$v){
+            $outstr.= $v['outer_id'].",";
+        }
+        $outerid = rtrim($outstr,',');
+        
+        if($outerid){
+            return $outerid;
+        }
     }
 }

@@ -24,7 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\CheckboxColumn'],
+//             ['class' => 'yii\grid\CheckboxColumn'],
+            ['class' => 'yii\grid\SerialColumn'],
 
 //            'id',
 //            'category_id',
@@ -32,12 +33,14 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'language_id',
 //            'star_id',
             // 'cluster_id',
-            [
-                'attribute'=>'station_id',
-                'value'=>function ($model) {
-                    return '['.$model->station->name.']';
-                },
-            ],
+            'station_id',
+//             [
+//                 'attribute'=>'station_id',
+//                 'value'=>function ($model) {
+// //                     return '['.$model->station_id->name.']';
+//                     return '['.$model->station_id.']';
+//                 },
+//             ],
             [
                 'attribute'=>'title',
                 'value'=>function ($model) {
