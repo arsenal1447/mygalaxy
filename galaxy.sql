@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2016-04-15 17:03:28
+Date: 2016-05-30 11:56:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -3758,6 +3758,7 @@ INSERT INTO `auth_assignment` VALUES ('Administrator', '1', '1432554123');
 INSERT INTO `auth_assignment` VALUES ('Administrator', '157', '1460615556');
 INSERT INTO `auth_assignment` VALUES ('Administrator', '158', '1460622854');
 INSERT INTO `auth_assignment` VALUES ('Customer', '158', '1460622854');
+INSERT INTO `auth_assignment` VALUES ('Customer', '160', '1464071220');
 INSERT INTO `auth_assignment` VALUES ('Merchant', '158', '1460622854');
 
 -- ----------------------------
@@ -3914,13 +3915,14 @@ CREATE TABLE `cart` (
   `data` varchar(255) DEFAULT NULL COMMENT 'json格式存取，额外的字段',
   `create_time` int(10) unsigned NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`cart_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cart
 -- ----------------------------
 INSERT INTO `cart` VALUES ('9', '1', '81', '0', '1', null, '1460618560');
 INSERT INTO `cart` VALUES ('10', '158', '84', '0', '1', null, '1460623278');
+INSERT INTO `cart` VALUES ('11', '160', '84', '0', '1', null, '1464142345');
 
 -- ----------------------------
 -- Table structure for `comment`
@@ -4289,6 +4291,26 @@ CREATE TABLE `order_item` (
 INSERT INTO `order_item` VALUES ('5', '19', '81', '1.00', '1', '托尔斯泰', 'default');
 
 -- ----------------------------
+-- Table structure for `payment`
+-- ----------------------------
+DROP TABLE IF EXISTS `payment`;
+CREATE TABLE `payment` (
+  `payment_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) DEFAULT '0',
+  `payment_method` varchar(20) DEFAULT '0',
+  `payment_fee` varchar(20) DEFAULT '0',
+  `transcation_no` int(11) DEFAULT '0',
+  `create_at` datetime DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL,
+  `status` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`payment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of payment
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `post`
 -- ----------------------------
 DROP TABLE IF EXISTS `post`;
@@ -4377,6 +4399,7 @@ CREATE TABLE `profile` (
 INSERT INTO `profile` VALUES ('157', null, null, '123@qq.com', '487f87505f619bf9ea08f26bb34f8118', null, null, null);
 INSERT INTO `profile` VALUES ('158', null, null, 'abc@qq.com', 'd09e53ff469433c5a871a59610a3f7db', null, null, null);
 INSERT INTO `profile` VALUES ('159', null, null, 'bbb@qq.com', 'efa26214a23636cb7fa71d2aec96ffb7', null, null, null);
+INSERT INTO `profile` VALUES ('160', null, null, 'zxx123@qq.com', 'f5cf39b18acf012cfbae689fde1d6060', null, null, null);
 
 -- ----------------------------
 -- Table structure for `prop_img`
@@ -4731,7 +4754,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_unique_username` (`username`),
   UNIQUE KEY `user_unique_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=160 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
@@ -4740,6 +4763,7 @@ INSERT INTO `user` VALUES ('1', 'admin', 'admin@a.com', '$2y$10$LoiYdggKnoIZBsrl
 INSERT INTO `user` VALUES ('157', 'home', '123@qq.com', '$2y$10$ZQLqsI2F9TZin0IyKQIJT.RN3BKe/vjg1Ovs74rDzZ0B3qChJiE1y', '4q-42jX5zmo7G86PC0ZRPBg1FAMnB09w', '1432887959', null, null, '127.0.0.1', '1432887959', '1460615513', '0');
 INSERT INTO `user` VALUES ('158', 'abc', 'abc@qq.com', '$2y$10$3wZcx8lUvWEqDbgsAKz6ueqOLgddB7SybkOo89ecYSTc9QB7Y2cyW', '0_tCGUE8jjiH5ECyOTj63fQi0r5r2hdd', '1460622546', null, null, '::1', '1460622546', '1460622546', '0');
 INSERT INTO `user` VALUES ('159', 'bbb', 'bbb@qq.com', '$2y$10$XJUxolPzRyMXwmLcIdOC0OZBCprvInrXYsK0FNT8lrODbdDmiFRhG', 'Vwv7xYAhOaMix_jkGTlD5BuLUcQRCjCF', '1460624821', null, null, '127.0.0.1', '1460624821', '1460624821', '0');
+INSERT INTO `user` VALUES ('160', 'zxx123', 'zxx123@qq.com', '$2y$10$fKL3O0LlSNcJz0PJPe7DQOS6pFnppHcrhG9J9wzr3O77jAevbQXF.', 'xOK1ERnaOHjqpv4TnpByw5G57s4HdshI', '1464071219', null, null, '::1', '1464071219', '1464071219', '0');
 
 -- ----------------------------
 -- Table structure for `user_profile`
